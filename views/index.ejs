@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <style>
+        * { margin: 0; padding: 0;}
+        html {width: 100%;height: 100%;}
+        body {font-family: Arial, Helvetica, sans-serif; padding: 1rem; color: #474747;}
+        h1 {margin-bottom: 20px;}
+        .results {width: fit-content; border-collapse: collapse; border-left: 2px solid #474747; border-right: 2px solid #474747;}
+        .table-row {display: grid; grid-template-columns: 100px 275px 100px 350px; border-bottom: 2px solid #9e9e9e;}
+        .head .table-row {font-weight: bolder; border-top: 2px solid #9e9e9e; background-color: #dbdbdb;}
+        .body .table-row {cursor: pointer;}
+        .body .table-row:hover {background-color: #f1f1f1;}
+        .table-data {display: flex; align-items: center; justify-content: center; padding: 5px 10px;}
+        button {width: 70px;}
+    </style>
+</head>
+<body>
+    
+    <h1>Search Books</h1>
+    <form action="/search" method="get" id="form">
+        <label for="title">Title:</label>
+        <input type="text" id="title" name="title" disabled>
+        <input type="checkbox" id="titleCheck"><br><br>
+        
+        <label for="year">Year:</label>
+        <input type="number" id="year" min="0" max="2024" name="year" disabled>
+        <input type="checkbox" id="yearCheck"><br><br>
+        
+        <button type="submit" id="submit">Search</button><br><br>
+    </form>
+
+    <h2>Search Results</h2><br>
+    <% if (books.length > 0) { %>
+    <div class="results">
+        <div class="head">
+            <div class="table-row">
+                <div class="table-data">ID</div>
+                <div class="table-data">Title</div>
+                <div class="table-data">Year</div>
+                <div class="table-data">Author</div>
+            </div>
+        </div>
+
+        <div class="body">
+            <% books.forEach(book => { %>
+            <div class="table-row">
+                <div class="table-data"><%=book.id%></div>
+                <div class="table-data"><%=book.title%></div>
+                <div class="table-data"><%=book.year%></div>
+                <div class="table-data"><%=book.author%></div>
+            </div>
+            <% }); %>
+        </div>
+    </div>
+    <% } else { %>
+        <p>No books found.</p>
+    <% } %>
+    <script src="js/script.js"></script>
+</body>
+</html>
