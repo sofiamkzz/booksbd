@@ -4,20 +4,20 @@ document.addEventListener('DOMContentLoaded', function() {
     let yearCheckbox = document.getElementById('yearCheck');
     let titleInput = document.getElementById('title');
     let yearInput = document.getElementById('year');
-    
+
     form.addEventListener('submit', (e) => {
         e.preventDefault();
     
-        if (yearCheckbox.checked) {
+        if (yearCheckbox.checked && yearInput) {
             window.location.assign(`/search/${yearInput.value}`);
-        } else {
+        } else if (titleCheckbox.checked && titleInput) {
             window.location.assign(`/search?title=${titleInput.value}`);
         }
     });
-
+    
     titleCheckbox.addEventListener('click', function() {
         let titleChecked = titleCheckbox.checked;
-
+        
         if (titleChecked) {
             titleInput.disabled = false;
             yearInput.disabled = true;

@@ -12,12 +12,11 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'));
 
 // Rotas
-app.get('/', controller.renderHomePage);
+app.get('/', controller.renderHome);
+app.get('/search?', controller.renderByTitle);
+app.get('/search/:year', controller.renderByYear);
 
-app.get('/search/:year', controller.searchByYear);
-app.get('/search', controller.searchByTitle);
-
-const port = 3000;
-app.listen(port, () => {
-    console.log(`Server running at http://localhost:${port}`);
+const PORT = process.env.PORT || 3000; // Usar a porta do ambiente ou padrão 3000
+app.listen(PORT, () => {
+    console.log(`O servidor está rodando na porta ${PORT}`);
 });

@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title></title>
+    <title>Library</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <style>
         * { margin: 0; padding: 0;}
         html {width: 100%;height: 100%;}
@@ -15,13 +16,13 @@
         .body .table-row {cursor: pointer;}
         .body .table-row:hover {background-color: #f1f1f1;}
         .table-data {display: flex; align-items: center; justify-content: center; padding: 5px 10px;}
-        button {width: 70px;}
+        button {height: 30px;}
     </style>
 </head>
 <body>
     
     <h1>Search Books</h1>
-    <form action="/search" method="get" id="form">
+    <form action="search" method="get" id="form">
         <label for="title">Title:</label>
         <input type="text" id="title" name="title" disabled>
         <input type="checkbox" id="titleCheck"><br><br>
@@ -33,8 +34,10 @@
         <button type="submit" id="submit">Search</button><br><br>
     </form>
 
-    <h2>Search Results</h2><br>
-    <% if (books.length > 0) { %>
+    <h2>Results</h2><br>
+    <% if (error) { %>
+        <p><%= error %></p>
+    <% } else if (books.length > 0) { %>
     <div class="results">
         <div class="head">
             <div class="table-row">
@@ -58,7 +61,7 @@
     </div>
     <% } else { %>
         <p>No books found.</p>
-    <% } %>
+    <%} %>
     <script src="js/script.js"></script>
 </body>
 </html>
