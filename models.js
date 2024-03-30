@@ -1,14 +1,14 @@
 const connection = require('./db');
 
-// Rota para renderizar a página inicial com os resultados
+// Função para renderizar a página inicial com os resultados
 function getAllBooks(callback) {
     const sql = 'SELECT * FROM books';
     connection.query(sql, callback);
 }
 
-// Rota para exibir informações sobre um livro por ano a partir do parâmetro URL
+// Função para exibir informações sobre um livro por ano a partir do parâmetro URL
 function searchByYear(year, callback) {
-    if (year !== undefined || year !== null || !year) {
+    if (year) {
         const sql = 'SELECT * FROM books WHERE year = ?';
         connection.query(sql, [year], callback);
     } else {
@@ -16,11 +16,12 @@ function searchByYear(year, callback) {
     }
 }
 
-// Rota para pesquisar livros com base no título da string de consulta
+// Função para pesquisar livros com base no título da string de consulta
 function searchByTitle(title, callback) {
-    if (title && title.trim() !== '') {
+    if (title) {
+        title = title.trim();
         const sql = 'SELECT * FROM books WHERE UPPER(title) LIKE ?';
-        connection.query(sql, [`%${title.toUpperCase()}%`], callback);
+        connection.query(sql, [`%${title}%`], callback);
     } else {
         callback(null, []);
     }
